@@ -7,9 +7,10 @@ from datetime import datetime, timedelta
 import time
 
 
-days = os.environ['DAYS']
+days = int(os.environ['DAYS'])
 
 def is_idle_workspace(workspace_id, start_date, today):  
+    cloudwatch = boto3.client('cloudwatch')
     """Return true if the UserConnected count == 0 for threshold days."""
     metrics = cloudwatch.get_metric_statistics(
         Namespace='AWS/WorkSpaces',
@@ -33,6 +34,7 @@ def is_idle_workspace(workspace_id, start_date, today):
 
 def get_workspaces(next_token = ''):
     """Get all workspaces, uses recursion to deal with NextTokens."""
+    ws = boto3.client('workspaces')
     all_workspaces = []
     if next_token == '':
         workspaces = ws.describe_workspaces()
@@ -50,10 +52,7 @@ def lambda_handler(event, context):
     today           = datetime.now() + timedelta(days=1) # today + 1 because we want all of today  
     threshold       = timedelta(days=days)  
     start_date      = today - threshold
-
-    cloudwatch = boto3.client('cloudwatch')
-    ws = boto3.client('workspaces')
-
+    
     all_workspaces = get_workspaces()
 
     with open('workspaces.csv', 'w') as out_file:
@@ -78,4 +77,3 @@ def lambda_handler(event, context):
                 ]
             )
             print(workspace['WorkspaceId'])
-        
