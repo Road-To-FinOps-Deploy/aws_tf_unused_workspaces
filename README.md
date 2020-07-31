@@ -1,7 +1,7 @@
 # Gets Idle AWS Workspaces
 
 ```
-The script schedules the review of any workspaces that have had 0 userconnection events for "threshold" days, defaults to 28.  (deafult 7). 
+The script schedules the review of any workspaces that have had 0 userconnection events for "threshold" days, defaults to 28. 
 This reviews all regions in your account
 ```
 
