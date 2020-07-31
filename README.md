@@ -11,8 +11,8 @@ This reviews all regions in your account
 module "aws_tf_unused_workspaces" {
   source = "/aws_tf_unused_workspaces"
   send_email = true
-  sender_email = "emailer@hotmail.com
-  reciver_email = "emailto@hotmail.com
+  sender_email = "emailer@hotmail.com"
+  reciver_email = "emailto@hotmail.com"
 }
 
 ## Optional Inputs
