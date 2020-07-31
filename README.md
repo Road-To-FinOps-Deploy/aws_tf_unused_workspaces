@@ -19,7 +19,10 @@ module "aws_tf_unused_workspaces" {
 | unused\_workspaces\_cleanup\_cron | Rate expression for when to run the review of volumes| string | `"cron(0 8 1 * ? *)"` | no 
 | function\_prefix | Prefix for the name of the lambda created | string | `""` | no |
 | days| The number of days the Snapshot has been there and so will no be deleted | `"28"` | no |
-
+| region| Region it is deployed to and emailed from | `"eu-west-1"` | no | 
+| send\_email| If you want to recive an email for this report | `"True"` | no |
+| sender\_email| If yes to send email the needed. Who will be sending the email| `""` | yes/no |
+| reciver\_email| If yes to recive email the needed. Who will be sending the emai| `"28"` | yes/ |
 
 ## Testing 
 

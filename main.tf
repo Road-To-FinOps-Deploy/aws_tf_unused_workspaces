@@ -17,6 +17,10 @@ resource "aws_lambda_function" "unused_workspaces_cleanup" {
   environment {
     variables = {
       DAYS = var.days
+      REGION = var.region 
+      RECIVER_EMAIL = var.reciver_email 
+      SENDER_EMAIL = var.sender_email
+      SEND_EMAIL = var.send_email
     }
   }
 }
@@ -40,3 +44,8 @@ resource "aws_cloudwatch_event_target" "unused_workspaces_cleanup_lambda" {
   arn       = aws_lambda_function.unused_workspaces_cleanup.arn
 }
 
+
+
+resource "aws_ses_email_identity" "sns_email" {
+  email = var.sender_email
+}

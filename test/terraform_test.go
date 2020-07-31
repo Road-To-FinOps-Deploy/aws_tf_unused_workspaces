@@ -31,6 +31,7 @@ func TestTerraformAws(t *testing.T) {
 		
 		Vars: map[string]interface{}{
 			"function_prefix": "test",
+			"sender_email":"email@hotmail.com",
 		},
 		/*
 		// Environment variables to set when running Terraform
