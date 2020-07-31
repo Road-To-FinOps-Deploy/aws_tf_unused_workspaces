@@ -1,6 +1,6 @@
 variable "unused_workspaces_cleanup_cron" {
   description = "interval of time to trigger lambda function"
-  default     = "cron(0 6 ? * MON *)"
+  default     = "cron(0 8 1 * ? *)"
 }
 
 variable "function_prefix" {
@@ -9,5 +9,5 @@ variable "function_prefix" {
 
 
 variable "days" {
-  default = "7"
+  default = "28"
 }

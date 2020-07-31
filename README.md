@@ -1,46 +1,24 @@
 # Gets Idle AWS Workspaces
 
-Prints to console workspace_id's that have had 0 userconnection events for "threshold" days, defaults to 50.
-
-Writes out to console and to csv.
-The CSV will contain all workspaces, with the IdleFor<THRESHOLD>days header set to either 'TRUE' or 'FALSE'.
-
-## Usage:
-```shell
-python get_unused_workspaces.py --threshold_days=120
 ```
-
-
-## Requirements:
-* Must have permission list/describe Workspaces
-* Must have permission to get cloudwatch metrics
-* boto3 installed
-* python3 installed
-* aws CLI configured
-
-
-
-
-# Lambda Preventer
-```
-The script schedules the review of any ebs volumes that have been unattached for X days (deafult 7). 
+The script schedules the review of any workspaces that have had 0 userconnection events for "threshold" days, defaults to 28.  (deafult 7). 
 This reviews all regions in your account
 ```
 
 ## Usage
 
 
-module "aws_tf_ebs_volumes_cleaner" {
-  source = "/aws_tf_ebs_volumes_cleaner"
+module "aws_tf_unused_workspaces" {
+  source = "/aws_tf_unused_workspaces"
 }
 
 ## Optional Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| ebs\_volumes\_cleanup\_cron | Rate expression for when to run the review of volumes| string | `"cron(0 7 ? * MON-FRI *)"` | no 
+| unused\_workspaces\_cleanup\_cron | Rate expression for when to run the review of volumes| string | `"cron(0 8 1 * ? *)"` | no 
 | function\_prefix | Prefix for the name of the lambda created | string | `""` | no |
-| days| The number of days the Snapshot has been there and so will no be deleted | `"7"` | no |
+| days| The number of days the Snapshot has been there and so will no be deleted | `"28"` | no |
 
 
 ## Testing 
@@ -52,4 +30,4 @@ Configure your AWS credentials using one of the [supported methods for AWS CLI
 1. Install [Golang](https://golang.org/) and make sure this code is checked out into your `GOPATH`.
 cd test
 go mod init github.com/sg/sch
-go test -v -run TestTerraformAwsExample
+go test -v -run TestTerraformAws
