@@ -6,7 +6,8 @@
                 "iam:GetRole",
                 "kms:*", 
                 "workspaces:DescribeWorkspaces",
-                "cloudwatch:GetMetricStatistics"
+                "cloudwatch:GetMetricStatistics", 
+                "ses:SendRawEmail"
             ],
             "Effect": "Allow",
             "Resource": "*"
