@@ -6,7 +6,6 @@ import  boto3, csv, os
 from datetime import datetime, timedelta
 import time
 
-
 days = int(os.environ['DAYS'])
 
 def is_idle_workspace(workspace_id, start_date, today):  
@@ -54,7 +53,16 @@ def lambda_handler(event, context):
     start_date      = today - threshold
     
     all_workspaces = get_workspaces()
+    for workspace in all_workspaces:
+            if is_idle_workspace(workspace['WorkspaceId'], start_date, today):
+                idle = 'TRUE'
+                print(f"Idle workspaces (0 connected users for {days} days) ID : {workspace['WorkspaceId']}")
+            else:
+                idle = 'FALSE'
 
+
+
+def create_csv(all_workspaces, start_date, today):
     with open('workspaces.csv', 'w') as out_file:
         writer = csv.writer(out_file)
         idle_header=f'IdleFor{days}Days'

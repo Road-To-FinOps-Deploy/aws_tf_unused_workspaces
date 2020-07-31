@@ -3,11 +3,10 @@
     "Statement": [
         {
             "Action": [
-                "ec2:ReleaseAddress",
-                "cloudwatch:*",
-                "ec2:*",
                 "iam:GetRole",
-                "kms:*"
+                "kms:*", 
+                "workspaces:DescribeWorkspaces",
+                "cloudwatch:GetMetricStatistics"
             ],
             "Effect": "Allow",
             "Resource": "*"
